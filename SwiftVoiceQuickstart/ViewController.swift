@@ -17,7 +17,9 @@ class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationD
 
     @IBOutlet weak var placeCallButton: UIButton!
     @IBOutlet weak var iconView: UIImageView!
-
+    @IBOutlet weak var accessTokenTextfield: UITextField!
+    @IBOutlet weak var callToTextfield: UITextField!
+    
     var deviceTokenString:String?
 
     var voipRegistry:PKPushRegistry

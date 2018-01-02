@@ -11,13 +11,15 @@ import PushKit
 import CallKit
 import TwilioVoice
 
-let baseURLString = <#URL TO YOUR ACCESS TOKEN SERVER#>
+let baseURLString = ""
 let accessTokenEndpoint = "/accessToken"
 
 class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationDelegate, TVOCallDelegate, CXProviderDelegate {
 
     @IBOutlet weak var placeCallButton: UIButton!
     @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var accessTokenTextfield: UITextField!
+    @IBOutlet weak var callToTextfield: UITextField!
 
     var deviceTokenString:String?
 
@@ -431,12 +433,17 @@ class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationD
     }
     
     func performVoiceCall(uuid: UUID, client: String?, completionHandler: @escaping (Bool) -> Swift.Void) {
-        guard let accessToken = fetchAccessToken() else {
+        guard let accessToken = self.accessTokenTextfield.text else {
             completionHandler(false)
             return
         }
-        
-        call = TwilioVoice.call(accessToken, params: [:], delegate: self)
+
+        guard let to = self.callToTextfield.text else {
+            completionHandler(false)
+            return
+        }
+        let params = [ "To": to]
+        call = TwilioVoice.call(accessToken, params: params, delegate: self)
         
         guard let call = call else {
             NSLog("Failed to start outgoing call")

@@ -79,14 +79,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationD
             playOutgoingRingtone(completion: { [weak self] in
                 if let strongSelf = self {
                     strongSelf.call = TwilioVoice.call(accessToken, params: [:], delegate: strongSelf)
-                    
-                    if (strongSelf.call == nil) {
-                        NSLog("Failed to start outgoing call")
-                        return
-                    } else {
-                        strongSelf.toggleUIState(isEnabled: false)
-                        strongSelf.startSpin()
-                    }
+                    strongSelf.toggleUIState(isEnabled: false)
+                    strongSelf.startSpin()
                 }
             })
         }
@@ -287,7 +281,7 @@ class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationD
             NSLog("Call disconnected")
         }
         
-         callDisconnected()
+        callDisconnected()
     }
     
     func callDisconnected() {

@@ -68,6 +68,8 @@ class ViewController: UIViewController, PKPushRegistryDelegate, TVONotificationD
         super.viewDidLoad()
 
         toggleUIState(isEnabled: true)
+        callToTextfield.text = "5005550000"
+        //callToTextfield.text = "5005550006"
     }
 
     override func didReceiveMemoryWarning() {
